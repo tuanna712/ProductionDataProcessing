@@ -1,0 +1,58 @@
+﻿name_on_file;short_name;full_name;desc;unit;conversion_factor
+"Bach Ho
+Crude oil (T)";BH;Bạch Hổ;Domestic;ton;7,51
+"Rong
+(T)";R;Rồng;Domestic;ton;7,28
+"Gau Trang
+(T)";GT;Gấu Trắng;Domestic;ton;7,28
+"Tho Trang
+(T)";ThT;Thỏ Trắng;Domestic;ton;7,51
+"Nam Rong
+VSP (T)";NR;Nam Rồng;Domestic;ton;7,336
+"Doi Moi
+VRJ (T)";DM;Đồi Mồi;Domestic;ton;7,336
+"Su Tu Den
+(bbls)";STD;Sư Tử Đen;Domestic;bbls;7,39230829
+"Su Tu Vang
+(bbls)";STV;Sư Tử Vàng;Domestic;bbls;7,467761197
+"Su Tu Den ĐB
+(bbls)";STD-DB;Sư Tử Đen - ĐB;Domestic;bbls;7,437543489
+"Su Tu Trang
+(bbls)";STT;Sư Tử Trắng;Domestic;bbls;7,978309665
+"Su Tu Nau 
+(bbls)";STN;Sư Tử Nâu;Domestic;bbls;7,613840923
+"Rang Dong
+(bbls)";RangDong;Rạng Đông;Domestic;bbls;7,58
+"Phương Dong
+(bbls)";PhuongDong;Phương Đông;Domestic;bbls;7,82
+"PM3CAA
+(bbls)";PM3CAA;PM3CAA;Domestic;bbls;7,5
+"Block 46CN
+(bbls)";46CN;46CN;Domestic;bbls;7,5
+"Ruby
+(bbls)";Ruby;Ruby;Domestic;bbls;7,44
+"Ca Ngu Vang
+(bbls)";CNV;Cá Ngừ Vàng;Domestic;bbls;7,8
+"Te Giac Trang
+(bbls)";TGT;Tê Giác Trắng;Domestic;bbls;7,435
+"Dai Hung
+(bbls)";DH;Đại Hùng;Domestic;bbls;7,435
+"Lan Tay
+(bbls)";LT;Lan Tây;Domestic;bbls;8,609397763
+"RĐ-RĐT
+(bbls)";RD-RDT;Rồng Đôi -  Rồng Đôi Tây;Domestic;bbls;7,88
+"Chim Sao
+(bbls)";CS;Chim Sáo;Domestic;bbls;7,65
+Hai Su Trang (bbls);HST;Hải Sư Trắng;Domestic;bbls;7,58
+Hai Su Den (bbls);HSD;Hải Sử Đen;Domestic;bbls;7,58
+Thang Long +Đông Đô    (bbls);TLDD;Thăng Long Đông Đô;Domestic;bbls;7,28889
+Dong Do     bbls);DD;Đông Đô;Domestic;bbls;7,28889
+Ca Tam (ton);CT;Cá Tầm;Domestic;ton;7,28
+Moc Tinh   (bbls);MT;Mộc Tinh;Domestic;bbls;7,568
+Hai Thach-Mộc Tinh  (bbls);HT-MT;Hải Thạch - Mộc Tinh;Domestic;bbls;7,568
+Cond. DC (Bể CL) & GPP Ca Mau (T);DC-GPP;Dinh Cố - GPP Cà Mau;Domestic;ton;8,43
+Sao Vang    (bbl);SV;Sao Vàng;Domestic;bbls;8,106
+"Nhenhexky
+(T)";Nhenhexky;Nhenhexky;Oversea;ton;7,22
+Thien Ung (ton) 1m3=0.75 ton;ThienUng;Thiên Ưng;Domestic;ton;8,386414667
+ Algeria(bbls);Algeria;Algeria;Oversea;bbls;7,8

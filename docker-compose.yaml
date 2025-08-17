@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:13 # Using a specific stable version
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_DB: QLKTDB      # Default database name
+      POSTGRES_USER: dev        # Default user
+      POSTGRES_PASSWORD: StR0&GP@sSW)R4 # <--- CHANGE THIS TO A STRONG PASSWORD!
+    ports:
+      - "5432:5432" # Host_Port:Container_Port (PostgreSQL default port)
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data # Persistent data volume
