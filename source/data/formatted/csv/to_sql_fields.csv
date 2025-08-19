@@ -1,95 +1,95 @@
-short_name,full_name,unit,conversion_factor,prod_type
-LT,Lan Tây,tr.m3,35.314666721,GAS_PROD
-RD-RDT,Rồng Đôi -  Rồng Đôi Tây,tr.m3,35.314666721,GAS_PROD
-PM3-46CN,PM3 - 46CN,tr.ft3,35.314666721,GAS_PROD
-BH,Bạch Hổ,tr.m3,35.314666721,GAS_PROD
-RangDong,Rạng Đông,tr.ft3,35.314666721,GAS_PROD
-CNV,Cá Ngừ Vàng,tr.ft3,35.314666721,GAS_PROD
-TGT,Tê Giác Trắng,tr.ft3,35.314666721,GAS_PROD
-STT,Sư Tử Trắng,tr.ft3,35.314666721,GAS_PROD
-CS,Chim Sáo,tr.ft3,35.314666721,GAS_PROD
-HST-HSD,Hải Sư Trắng - Hải Sư Đen,tr.ft3,35.314666721,GAS_PROD
-CT,Cá Tầm,tr.m3,35.314666721,GAS_PROD
-SV,Sao Vàng,tr.m3,35.314666721,GAS_PROD
-HT,Hải Thạch,tr.m3,35.314666721,GAS_PROD
-ThaiBinh,Thái Bình,tr.ft3,35.314666721,GAS_PROD
-DH,Đại Hùng,tr.m3,35.314666721,GAS_PROD
-ThienUng,Thiên Ưng,tr.m3,35.314666721,GAS_PROD
-BH,Bạch Hổ,ton,7.51,OIL_PROD
-R,Rồng,ton,7.28,OIL_PROD
-GT,Gấu Trắng,ton,7.28,OIL_PROD
-ThT,Thỏ Trắng,ton,7.51,OIL_PROD
-NR,Nam Rồng,ton,7.336,OIL_PROD
-DM,Đồi Mồi,ton,7.336,OIL_PROD
-STD,Sư Tử Đen,bbls,7.39230829,OIL_PROD
-STV,Sư Tử Vàng,bbls,7.467761197,OIL_PROD
-STD-DB,Sư Tử Đen - ĐB,bbls,7.437543489,OIL_PROD
-STT,Sư Tử Trắng,bbls,7.978309665,OIL_PROD
-STN,Sư Tử Nâu,bbls,7.613840923,OIL_PROD
-RangDong,Rạng Đông,bbls,7.58,OIL_PROD
-PhuongDong,Phương Đông,bbls,7.82,OIL_PROD
-PM3CAA,PM3CAA,bbls,7.5,OIL_PROD
-46CN,46CN,bbls,7.5,OIL_PROD
-Ruby,Ruby,bbls,7.44,OIL_PROD
-CNV,Cá Ngừ Vàng,bbls,7.8,OIL_PROD
-TGT,Tê Giác Trắng,bbls,7.435,OIL_PROD
-DH,Đại Hùng,bbls,7.435,OIL_PROD
-LT,Lan Tây,bbls,8.609397763,OIL_PROD
-RD-RDT,Rồng Đôi -  Rồng Đôi Tây,bbls,7.88,OIL_PROD
-CS,Chim Sáo,bbls,7.65,OIL_PROD
-HST,Hải Sư Trắng,bbls,7.58,OIL_PROD
-HSD,Hải Sử Đen,bbls,7.58,OIL_PROD
-TLDD,Thăng Long Đông Đô,bbls,7.28889,OIL_PROD
-DD,Đông Đô,bbls,7.28889,OIL_PROD
-CT,Cá Tầm,ton,7.28,OIL_PROD
-MT,Mộc Tinh,bbls,7.568,OIL_PROD
-HT-MT,Hải Thạch - Mộc Tinh,bbls,7.568,OIL_PROD
-DC-GPP,Dinh Cố - GPP Cà Mau,ton,8.43,OIL_PROD
-SV,Sao Vàng,bbls,8.106,OIL_PROD
-Nhenhexky,Nhenhexky,ton,7.22,OIL_PROD
-ThienUng,Thiên Ưng,ton,8.386414667,OIL_PROD
-Algeria,Algeria,bbls,7.8,OIL_PROD
-BH,Bạch Hổ,tr.m3,35.314666721,GAS_PLAN
-TGT,Tê Giác Trắng,tr.m3,35.314666721,GAS_PLAN
-RangDong,Rạng Đông,tr.m3,35.314666721,GAS_PLAN
-RDPD,Rạng Đông - Phương Đông,tr.m3,35.314666721,GAS_PLAN
-CS,Chim Sáo,tr.m3,35.314666721,GAS_PLAN
-CS-D,Chim Sáo - Dừa,tr.m3,35.314666721,GAS_PLAN
-STD-STV-STT,Sư Tử Đen - Vàng - Trắng,tr.m3,35.314666721,GAS_PLAN
-STD-STV-STT-STN,Sư Tử Đen - Vàng - Trắng - Nâu,tr.m3,35.314666721,GAS_PLAN
-CNV,Cá Ngừ Vàng,tr.m3,35.314666721,GAS_PLAN
-LTLD,Lan Tây - Lan Đỏ,tr.m3,35.314666721,GAS_PLAN
-RD-RDT,Rồng Đôi - Rồng Đôi Tây,tr.m3,35.314666721,GAS_PLAN
-PM3CA-46CN,PM3CA - 46CN,tr.m3,35.314666721,GAS_PLAN
-HST-HSD,Hải Sư Trắng - Hải Sư Đen,tr.m3,35.314666721,GAS_PLAN
-HT-MT,Hải Thạch - Mộc Tinh,tr.m3,35.314666721,GAS_PLAN
-TB,Thái Bình,tr.m3,35.314666721,GAS_PLAN
-DH,Đại Hùng,tr.m3,35.314666721,GAS_PLAN
-ThienUng,Thiên Ưng,tr.m3,35.314666721,GAS_PLAN
-CT,Cá Tầm,tr.m3,35.314666721,GAS_PLAN
-SVDN,Sao Vàng - Đại Nguyệt,tr.m3,35.314666721,GAS_PLAN
-KNT-N,Kình Ngư Trắng Nam,tr.m3,35.314666721,GAS_PLAN
-BHR,Bạch Hổ - Rồng,tr.tons,,OIL_PLAN
-DM,Đồi Mồi,tr.tons,,OIL_PLAN
-DC,Dinh Cố,tr.tons,,OIL_PLAN
-DH,Đại Hùng,tr.tons,,OIL_PLAN
-PM3CA-46CN,PM3CA - 46CN,tr.tons,,OIL_PLAN
-PM3CA,PM3CA,tr.tons,,OIL_PLAN
-46CN,46CN,tr.tons,,OIL_PLAN
-RDPD,Rạng Đông - Phương Đông,tr.tons,,OIL_PLAN
-RPT,Ruby - Pearl - Topaz,tr.tons,,OIL_PLAN
-STD-STV-STT-STN,Sư Tử Đen - Vàng - Trắng - Nâu,tr.tons,,OIL_PLAN
-CNV,Cá Ngừ Vàng,tr.tons,,OIL_PLAN
-TGT,Tê Giác Trắng,tr.tons,,OIL_PLAN
-KNT-N,Kình Ngư Trắng Nam,tr.tons,,OIL_PLAN
-CS,Chim Sáo,tr.tons,,OIL_PLAN
-LTLD,Lan Tây - Lan Đỏ,tr.tons,,OIL_PLAN
-RD-RDT,Rồng Đôi - Rồng Đôi Tây,tr.tons,,OIL_PLAN
-HST-HSD,Hải Sư Trắng - Hải Sư Đen,tr.tons,,OIL_PLAN
-TLDD,Thăng Long - Đông Đô,tr.tons,,OIL_PLAN
-HT-MT,Hải Thạch - Mộc Tinh,tr.tons,,OIL_PLAN
-ThienUng,Thiên Ưng,tr.tons,,OIL_PLAN
-CT,Cá Tầm,tr.tons,,OIL_PLAN
-SVDN,Sao Vàng - Đại Nguyệt,tr.tons,,OIL_PLAN
-Algeria,Algeria,tr.tons,,OIL_PLAN
-Nhenhexky,Nhenhexky,tr.tons,,OIL_PLAN
+short_name,full_name,unit,conversion_factor,prod_type,location
+LT,Lan Tây,tr.m3,35.3146667,GAS_PROD,domestic
+RD-RDT,Rồng Đôi -  Rồng Đôi Tây,tr.m3,35.3146667,GAS_PROD,domestic
+PM3-46CN,PM3 - 46CN,tr.ft3,35.3146667,GAS_PROD,domestic
+BH,Bạch Hổ,tr.m3,35.3146667,GAS_PROD,domestic
+RangDong,Rạng Đông,tr.ft3,35.3146667,GAS_PROD,domestic
+CNV,Cá Ngừ Vàng,tr.ft3,35.3146667,GAS_PROD,domestic
+TGT,Tê Giác Trắng,tr.ft3,35.3146667,GAS_PROD,domestic
+STT,Sư Tử Trắng,tr.ft3,35.3146667,GAS_PROD,domestic
+CS,Chim Sáo,tr.ft3,35.3146667,GAS_PROD,domestic
+HST-HSD,Hải Sư Trắng - Hải Sư Đen,tr.ft3,35.3146667,GAS_PROD,domestic
+CT,Cá Tầm,tr.m3,35.3146667,GAS_PROD,domestic
+SV,Sao Vàng,tr.m3,35.3146667,GAS_PROD,domestic
+HT,Hải Thạch,tr.m3,35.3146667,GAS_PROD,domestic
+ThaiBinh,Thái Bình,tr.ft3,35.3146667,GAS_PROD,domestic
+DH,Đại Hùng,tr.m3,35.3146667,GAS_PROD,domestic
+ThienUng,Thiên Ưng,tr.m3,35.3146667,GAS_PROD,domestic
+BH,Bạch Hổ,ton,7.51,OIL_PROD,domestic
+R,Rồng,ton,7.28,OIL_PROD,domestic
+GT,Gấu Trắng,ton,7.28,OIL_PROD,domestic
+ThT,Thỏ Trắng,ton,7.51,OIL_PROD,domestic
+NR,Nam Rồng,ton,7.336,OIL_PROD,domestic
+DM,Đồi Mồi,ton,7.336,OIL_PROD,domestic
+STD,Sư Tử Đen,bbls,7.39230829,OIL_PROD,domestic
+STV,Sư Tử Vàng,bbls,7.467761197,OIL_PROD,domestic
+STD-DB,Sư Tử Đen - ĐB,bbls,7.437543489,OIL_PROD,domestic
+STT,Sư Tử Trắng,bbls,7.978309665,OIL_PROD,domestic
+STN,Sư Tử Nâu,bbls,7.613840923,OIL_PROD,domestic
+RangDong,Rạng Đông,bbls,7.58,OIL_PROD,domestic
+PhuongDong,Phương Đông,bbls,7.82,OIL_PROD,domestic
+PM3CAA,PM3CAA,bbls,7.5,OIL_PROD,domestic
+46CN,46CN,bbls,7.5,OIL_PROD,domestic
+Ruby,Ruby,bbls,7.44,OIL_PROD,domestic
+CNV,Cá Ngừ Vàng,bbls,7.8,OIL_PROD,domestic
+TGT,Tê Giác Trắng,bbls,7.435,OIL_PROD,domestic
+DH,Đại Hùng,bbls,7.435,OIL_PROD,domestic
+LT,Lan Tây,bbls,8.609397763,OIL_PROD,domestic
+RD-RDT,Rồng Đôi -  Rồng Đôi Tây,bbls,7.88,OIL_PROD,domestic
+CS,Chim Sáo,bbls,7.65,OIL_PROD,domestic
+HST,Hải Sư Trắng,bbls,7.58,OIL_PROD,domestic
+HSD,Hải Sử Đen,bbls,7.58,OIL_PROD,domestic
+TLDD,Thăng Long Đông Đô,bbls,7.28889,OIL_PROD,domestic
+DD,Đông Đô,bbls,7.28889,OIL_PROD,domestic
+CT,Cá Tầm,ton,7.28,OIL_PROD,domestic
+MT,Mộc Tinh,bbls,7.568,OIL_PROD,domestic
+HT-MT,Hải Thạch - Mộc Tinh,bbls,7.568,OIL_PROD,domestic
+DC-GPP,Dinh Cố - GPP Cà Mau,ton,8.43,OIL_PROD,domestic
+SV,Sao Vàng,bbls,8.106,OIL_PROD,domestic
+Nhenhexky,Nhenhexky,ton,7.22,OIL_PROD,oversea
+ThienUng,Thiên Ưng,ton,8.386414667,OIL_PROD,domestic
+Algeria,Algeria,bbls,7.8,OIL_PROD,oversea
+BH,Bạch Hổ,tr.m3,35.3146667,GAS_PLAN,domestic
+TGT,Tê Giác Trắng,tr.m3,35.3146667,GAS_PLAN,domestic
+RangDong,Rạng Đông,tr.m3,35.3146667,GAS_PLAN,domestic
+RDPD,Rạng Đông - Phương Đông,tr.m3,35.3146667,GAS_PLAN,domestic
+CS,Chim Sáo,tr.m3,35.3146667,GAS_PLAN,domestic
+CS-D,Chim Sáo - Dừa,tr.m3,35.3146667,GAS_PLAN,domestic
+STD-STV-STT,Sư Tử Đen - Vàng - Trắng,tr.m3,35.3146667,GAS_PLAN,domestic
+STD-STV-STT-STN,Sư Tử Đen - Vàng - Trắng - Nâu,tr.m3,35.3146667,GAS_PLAN,domestic
+CNV,Cá Ngừ Vàng,tr.m3,35.3146667,GAS_PLAN,domestic
+LTLD,Lan Tây - Lan Đỏ,tr.m3,35.3146667,GAS_PLAN,domestic
+RD-RDT,Rồng Đôi - Rồng Đôi Tây,tr.m3,35.3146667,GAS_PLAN,domestic
+PM3CA-46CN,PM3CA - 46CN,tr.m3,35.3146667,GAS_PLAN,domestic
+HST-HSD,Hải Sư Trắng - Hải Sư Đen,tr.m3,35.3146667,GAS_PLAN,domestic
+HT-MT,Hải Thạch - Mộc Tinh,tr.m3,35.3146667,GAS_PLAN,domestic
+TB,Thái Bình,tr.m3,35.3146667,GAS_PLAN,domestic
+DH,Đại Hùng,tr.m3,35.3146667,GAS_PLAN,domestic
+ThienUng,Thiên Ưng,tr.m3,35.3146667,GAS_PLAN,domestic
+CT,Cá Tầm,tr.m3,35.3146667,GAS_PLAN,domestic
+SVDN,Sao Vàng - Đại Nguyệt,tr.m3,35.3146667,GAS_PLAN,domestic
+KNT-N,Kình Ngư Trắng Nam,tr.m3,35.3146667,GAS_PLAN,domestic
+BHR,Bạch Hổ - Rồng,tr.tons,,OIL_PLAN,domestic
+DM,Đồi Mồi,tr.tons,,OIL_PLAN,domestic
+DC,Dinh Cố,tr.tons,,OIL_PLAN,domestic
+DH,Đại Hùng,tr.tons,,OIL_PLAN,domestic
+PM3CA-46CN,PM3CA - 46CN,tr.tons,,OIL_PLAN,domestic
+PM3CA,PM3CA,tr.tons,,OIL_PLAN,domestic
+46CN,46CN,tr.tons,,OIL_PLAN,domestic
+RDPD,Rạng Đông - Phương Đông,tr.tons,,OIL_PLAN,domestic
+RPT,Ruby - Pearl - Topaz,tr.tons,,OIL_PLAN,domestic
+STD-STV-STT-STN,Sư Tử Đen - Vàng - Trắng - Nâu,tr.tons,,OIL_PLAN,domestic
+CNV,Cá Ngừ Vàng,tr.tons,,OIL_PLAN,domestic
+TGT,Tê Giác Trắng,tr.tons,,OIL_PLAN,domestic
+KNT-N,Kình Ngư Trắng Nam,tr.tons,,OIL_PLAN,domestic
+CS,Chim Sáo,tr.tons,,OIL_PLAN,domestic
+LTLD,Lan Tây - Lan Đỏ,tr.tons,,OIL_PLAN,domestic
+RD-RDT,Rồng Đôi - Rồng Đôi Tây,tr.tons,,OIL_PLAN,domestic
+HST-HSD,Hải Sư Trắng - Hải Sư Đen,tr.tons,,OIL_PLAN,domestic
+TLDD,Thăng Long - Đông Đô,tr.tons,,OIL_PLAN,domestic
+HT-MT,Hải Thạch - Mộc Tinh,tr.tons,,OIL_PLAN,domestic
+ThienUng,Thiên Ưng,tr.tons,,OIL_PLAN,domestic
+CT,Cá Tầm,tr.tons,,OIL_PLAN,domestic
+SVDN,Sao Vàng - Đại Nguyệt,tr.tons,,OIL_PLAN,domestic
+Algeria,Algeria,tr.tons,,OIL_PLAN,oversea
+Nhenhexky,Nhenhexky,tr.tons,,OIL_PLAN,oversea
