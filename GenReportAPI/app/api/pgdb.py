@@ -320,10 +320,14 @@ def generate_oil_report(query_date,
                 if sub_field in _unused_fields:
                     _v +=0
                 else:
-                    _v += PGDB.get_daily_prod_by_date(field_id=sub_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_ton')
+                    _daily_prod = PGDB.get_daily_prod_by_date(field_id=sub_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_ton')
+                    if _daily_prod is not None:
+                        _v += _daily_prod
             column_q.append(_v)
         else:
-            column_q.append(PGDB.get_daily_prod_by_date(field_id=_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_ton'))
+            _daily_prod = PGDB.get_daily_prod_by_date(field_id=_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_ton')
+            if _daily_prod is not None:
+                column_q.append(_daily_prod)
 
     # Column R
     column_r = []
@@ -335,32 +339,34 @@ def generate_oil_report(query_date,
                 if sub_field in _unused_fields:
                     _v +=0
                 else:
-                    _v += PGDB.get_daily_prod_by_date(field_id=sub_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_bbls')
+                    _daily_prod = PGDB.get_daily_prod_by_date(field_id=sub_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_bbls')
+                    if _daily_prod is not None:
+                        _v += _daily_prod
             column_r.append(_v)
         else:
-            column_r.append(PGDB.get_daily_prod_by_date(field_id=_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_bbls'))
+            _daily_prod = PGDB.get_daily_prod_by_date(field_id=_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_bbls')
+            if _daily_prod is not None:
+                column_r.append(_daily_prod)
     data = {
         "Mỏ": field_names,
-        "KHCP  (tr.tấn)": column_c,
-        "KHQT  (tr.tấn)": column_d,
-        "Tháng trước - Cộng dồn (ng.tấn)": column_e,
-        "Tháng trước - %KHCP": column_f,
-        "Tháng trước - %KHQT": column_g,
-        "Tháng này - KHCP (ng.tấn)": column_h,
-        "Tháng này - KHQT (ng.tấn)": column_i,
-        "Tháng này - Thực hiện (ng.tấn)": column_j,
-        "Tháng này - %KHCP": column_k,
-        "Tháng này - %KHQT": column_l,
-        "SL hiện tại - Cộng dồn (ng.tấn)": column_m,
-        "SL hiện tại - Cộng dồn (thùng)": column_n,
-        "SL hiện tại - %KHCP": column_o,
-        "SL hiện tại - %KHQT": column_p,
-        "SL ngày (tấn)": column_q,
-        "SL ngày (thùng)": column_r
+        "KHCP  (tr.tấn)": [ '%.2f' % elem for elem in column_c ],
+        "KHQT  (tr.tấn)": [ '%.2f' % elem for elem in column_d ],
+        "Tháng trước - Cộng dồn (ng.tấn)": [ '%.2f' % elem for elem in column_e ],
+        "Tháng trước - %KHCP": [ '%.2f' % elem for elem in column_f ],
+        "Tháng trước - %KHQT": [ '%.2f' % elem for elem in column_g ],
+        "Tháng này - KHCP (ng.tấn)": [ '%.2f' % elem for elem in column_h ],
+        "Tháng này - KHQT (ng.tấn)": [ '%.2f' % elem for elem in column_i ],
+        "Tháng này - Thực hiện (ng.tấn)": [ '%.2f' % elem for elem in column_j ],
+        "Tháng này - %KHCP": [ '%.2f' % elem for elem in column_k ],
+        "Tháng này - %KHQT": [ '%.2f' % elem for elem in column_l ],
+        "SL hiện tại - Cộng dồn (ng.tấn)": [ '%.2f' % elem for elem in column_m ],
+        "SL hiện tại - Cộng dồn (thùng)": [ '%.2f' % elem for elem in column_n ],
+        "SL hiện tại - %KHCP": [ '%.2f' % elem for elem in column_o ],
+        "SL hiện tại - %KHQT": [ '%.2f' % elem for elem in column_p ],
+        "SL ngày (tấn)": [ '%.2f' % elem for elem in column_q ],
+        "SL ngày (thùng)": [ '%.2f' % elem for elem in column_r ]
     }
     return pd.DataFrame(data)
-
-
 
 class PGGasQuery:
     def __init__(self, dbname, user, password, host, port):
@@ -527,10 +533,14 @@ def generate_gas_report(query_date,
         if isinstance(_field, tuple):
             _sub_field_prod = []
             for sub_field in _field:
-                _sub_field_prod.append(PGDB.get_accum_daily(field_id=sub_field, month=month, prod_type='GAS_PROD'))
+                _accum_prod = PGDB.get_accum_daily(field_id=sub_field, month=month, prod_type='GAS_PROD')
+                if _accum_prod is not None:
+                    _sub_field_prod.append(_accum_prod)
             column_e.append(sum(_sub_field_prod))
         else:
-            column_e.append(PGDB.get_accum_daily(field_id=_field, month=month, prod_type='GAS_PROD'))
+            _accum_prod = PGDB.get_accum_daily(field_id=_field, month=month, prod_type='GAS_PROD')
+            if _accum_prod is not None:
+                column_e.append(_accum_prod)
 
     # Column F
     column_f = [e * 100 / (c) if c != 0 else 0 for e, c in zip(column_e, column_c)]
@@ -555,7 +565,9 @@ def generate_gas_report(query_date,
                     _sub_field_prod.append(0)
             column_j.append(sum(_sub_field_prod))
         else:
-            column_j.append(PGDB.get_accum_monthly_prod_to_a_date(field_id=_field, report_date=query_date, prod_type='GAS_PROD'))
+            _prod = PGDB.get_accum_monthly_prod_to_a_date(field_id=_field, report_date=query_date, prod_type='GAS_PROD')
+            if _prod is not None:
+                column_j.append(_prod)
     # # Column K
     column_k = [j * 100 / h if h != 0 else 0 for j, h in zip(column_j, column_h)]
 
@@ -581,7 +593,9 @@ def generate_gas_report(query_date,
                     _v += _prod
             column_n.append(_v)
         else:
-            column_n.append(PGDB.get_accum_daily_prod_up_to_date(field_id=_field, report_date=query_date, prod_type='GAS_PROD', unit='prod_ft3', year=year))
+            _prod = PGDB.get_accum_daily_prod_up_to_date(field_id=_field, report_date=query_date, prod_type='GAS_PROD', unit='prod_ft3', year=year)
+            if _prod is not None:
+                column_n.append(_prod)
 
     # Column O
     column_o = [100*m/c if c != 0 else 0 for m, c in zip(column_m, column_c)]
@@ -604,7 +618,8 @@ def generate_gas_report(query_date,
             column_q.append(_v)
         else:
             _prod = PGDB.get_daily_prod_by_date(field_id=_field, report_date=query_date, prod_type='GAS_PROD', unit='prod_m3')
-            column_q.append(_prod[0])
+            if _prod is not None:
+                column_q.append(_prod[0])
 
     # Column R
     column_r = []
@@ -625,8 +640,9 @@ def generate_gas_report(query_date,
             column_r.append(_v)
         else:
             _prod = PGDB.get_daily_prod_by_date(field_id=_field, report_date=query_date, prod_type='GAS_PROD', unit='prod_ft3')
-            column_r.append(_prod[0])
-            
+            if _prod is not None:
+                column_r.append(_prod[0])
+
     data = {
             "Mỏ": field_names,
             "KHCP  (tr.m3)": ["%.2f" % elem for elem in column_c],
