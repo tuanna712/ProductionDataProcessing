@@ -255,10 +255,15 @@ def generate_oil_report(query_date,
         if isinstance(_field, tuple):
             _sub_field_prod = []
             for sub_field in _field:
-                _sub_field_prod.append(PGDB.get_accum_daily(field_id=sub_field, month=month, prod_type='OIL_PROD')/1000)
+                _prod = PGDB.get_accum_daily(field_id=sub_field, month=month, prod_type='OIL_PROD')/1000
+                if _prod is not None:
+                    _sub_field_prod.append(_prod)
+                else:
+                    _sub_field_prod.append(0)
             column_e.append(sum(_sub_field_prod))
         else:
-            column_e.append(PGDB.get_accum_daily(field_id=_field, month=month, prod_type='OIL_PROD')/1000)
+            _prod = PGDB.get_accum_daily(field_id=_field, month=month, prod_type='OIL_PROD')
+            column_e.append(_prod/1000 if _prod is not None else 0)
     # Column F
     column_f = [e * 100 / (1000 * c) if c != 0 else 0 for e, c in zip(column_e, column_c)]
     # Column G
@@ -274,12 +279,14 @@ def generate_oil_report(query_date,
             _sub_field_prod = []
             for sub_field in _field:
                 try:
-                    _sub_field_prod.append(PGDB.get_accum_monthly_prod_to_a_date(field_id=sub_field, report_date=query_date, prod_type='OIL_PROD')/1000)
+                    _prod = PGDB.get_accum_monthly_prod_to_a_date(field_id=sub_field, report_date=query_date, prod_type='OIL_PROD')
+                    _sub_field_prod.append(_prod/1000)
                 except Exception as e:
                     _sub_field_prod.append(0)
             column_j.append(sum(_sub_field_prod))
         else:
-            column_j.append(PGDB.get_accum_monthly_prod_to_a_date(field_id=_field, report_date=query_date, prod_type='OIL_PROD')/1000)
+            _prod = PGDB.get_accum_monthly_prod_to_a_date(field_id=_field, report_date=query_date, prod_type='OIL_PROD')
+            column_j.append(_prod/1000 if _prod is not None else 0)
     # Column K
     column_k = [j * 100 / h if h != 0 else 0 for j, h in zip(column_j, column_h)]
 
@@ -299,10 +306,16 @@ def generate_oil_report(query_date,
                 if sub_field in _unused_fields:
                     _v += 0
                 else:
-                    _v += PGDB.get_accum_daily_prod_up_to_date(field_id=sub_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_bbls', year=year)
+                    _prod = PGDB.get_accum_daily_prod_up_to_date(field_id=sub_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_bbls', year=year)
+                    if _prod is not None:
+                        _v += _prod
             column_n.append(_v)
         else:
-            column_n.append(PGDB.get_accum_daily_prod_up_to_date(field_id=_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_bbls', year=year))
+            _prod = PGDB.get_accum_daily_prod_up_to_date(field_id=_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_bbls', year=year)
+            if _prod is not None:
+                column_n.append(_prod)
+            else:
+                column_n.append(0)
 
     # Column O
     column_o = [m/(1000*c) if c != 0 else 0 for m, c in zip(column_m, column_c)]
@@ -328,6 +341,8 @@ def generate_oil_report(query_date,
             _daily_prod = PGDB.get_daily_prod_by_date(field_id=_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_ton')
             if _daily_prod is not None:
                 column_q.append(_daily_prod)
+            else:
+                column_q.append(0)
 
     # Column R
     column_r = []
@@ -347,6 +362,8 @@ def generate_oil_report(query_date,
             _daily_prod = PGDB.get_daily_prod_by_date(field_id=_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_bbls')
             if _daily_prod is not None:
                 column_r.append(_daily_prod)
+            else:
+                column_r.append(0)
     data = {
         "Mỏ": field_names,
         "KHCP  (tr.tấn)": [ '%.2f' % elem for elem in column_c ],
@@ -536,11 +553,15 @@ def generate_gas_report(query_date,
                 _accum_prod = PGDB.get_accum_daily(field_id=sub_field, month=month, prod_type='GAS_PROD')
                 if _accum_prod is not None:
                     _sub_field_prod.append(_accum_prod)
+                else:
+                    _sub_field_prod.append(0)
             column_e.append(sum(_sub_field_prod))
         else:
             _accum_prod = PGDB.get_accum_daily(field_id=_field, month=month, prod_type='GAS_PROD')
             if _accum_prod is not None:
                 column_e.append(_accum_prod)
+            else:
+                column_e.append(0)
 
     # Column F
     column_f = [e * 100 / (c) if c != 0 else 0 for e, c in zip(column_e, column_c)]
@@ -568,6 +589,8 @@ def generate_gas_report(query_date,
             _prod = PGDB.get_accum_monthly_prod_to_a_date(field_id=_field, report_date=query_date, prod_type='GAS_PROD')
             if _prod is not None:
                 column_j.append(_prod)
+            else:
+                column_j.append(0)
     # # Column K
     column_k = [j * 100 / h if h != 0 else 0 for j, h in zip(column_j, column_h)]
 
@@ -596,6 +619,8 @@ def generate_gas_report(query_date,
             _prod = PGDB.get_accum_daily_prod_up_to_date(field_id=_field, report_date=query_date, prod_type='GAS_PROD', unit='prod_ft3', year=year)
             if _prod is not None:
                 column_n.append(_prod)
+            else:
+                column_n.append(0)
 
     # Column O
     column_o = [100*m/c if c != 0 else 0 for m, c in zip(column_m, column_c)]
@@ -620,6 +645,8 @@ def generate_gas_report(query_date,
             _prod = PGDB.get_daily_prod_by_date(field_id=_field, report_date=query_date, prod_type='GAS_PROD', unit='prod_m3')
             if _prod is not None:
                 column_q.append(_prod[0])
+            else:
+                column_q.append(0)
 
     # Column R
     column_r = []
@@ -642,6 +669,8 @@ def generate_gas_report(query_date,
             _prod = PGDB.get_daily_prod_by_date(field_id=_field, report_date=query_date, prod_type='GAS_PROD', unit='prod_ft3')
             if _prod is not None:
                 column_r.append(_prod[0])
+            else:
+                column_r.append(0)
 
     data = {
             "Mỏ": field_names,
