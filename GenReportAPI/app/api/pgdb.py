@@ -110,7 +110,7 @@ class PGOilQuery:
             SELECT {unit} FROM daily_prod
             WHERE field_id = %s AND report_date = %s AND prod_type = %s;
         """, (field_id, report_date, prod_type))
-        return self.cur.fetchone()[0]
+        return self.cur.fetchone()
     
     def get_conversion_factor(self, field_id, prod_type):
         # Get factor from field table by field_id and prod_type
@@ -335,12 +335,12 @@ def generate_oil_report(query_date,
                 else:
                     _daily_prod = PGDB.get_daily_prod_by_date(field_id=sub_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_ton')
                     if _daily_prod is not None:
-                        _v += _daily_prod
+                        _v += _daily_prod[0]
             column_q.append(_v)
         else:
             _daily_prod = PGDB.get_daily_prod_by_date(field_id=_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_ton')
             if _daily_prod is not None:
-                column_q.append(_daily_prod)
+                column_q.append(_daily_prod[0])
             else:
                 column_q.append(0)
 
@@ -356,12 +356,12 @@ def generate_oil_report(query_date,
                 else:
                     _daily_prod = PGDB.get_daily_prod_by_date(field_id=sub_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_bbls')
                     if _daily_prod is not None:
-                        _v += _daily_prod
+                        _v += _daily_prod[0]
             column_r.append(_v)
         else:
             _daily_prod = PGDB.get_daily_prod_by_date(field_id=_field, report_date=query_date, prod_type='OIL_PROD', unit='prod_bbls')
             if _daily_prod is not None:
-                column_r.append(_daily_prod)
+                column_r.append(_daily_prod[0])
             else:
                 column_r.append(0)
     data = {
