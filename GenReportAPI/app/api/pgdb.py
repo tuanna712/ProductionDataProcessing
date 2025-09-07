@@ -285,13 +285,14 @@ def generate_oil_report(query_date,
         "Hải Sư Trắng +Hải Sư Đen",
         "Thăng Long + Đông Đô",
         "Hải Thạch + Mộc Tinh",
+        "Kình Ngư Trắng - Nam",
         "Cá Tầm",
         "Thiên Ưng",
         "Sao Vàng -Đại Nguyệt",
         "Nhenhesky (49%VN)",
-        "Algeria"
+        "Algeria",
     ]
-    fields =['BHR', 'DM', 'DC', 'DH', 'PM3CA', '46CN', 'RDPD', 'RPT', 'STD-STV-STT-STN', 'CNV', 'TGT', 'CS', 'LTLD', 'RD-RDT', 'HST-HSD', 'TLDD', 'HT-MT', 'CT', 'ThienUng', 'SVDN', 'Nhenhexky', 'Algeria']
+    fields =['BHR', 'DM', 'DC', 'DH', 'PM3CA', '46CN', 'RDPD', 'RPT', 'STD-STV-STT-STN', 'CNV', 'TGT', 'CS', 'LTLD', 'RD-RDT', 'HST-HSD', 'TLDD', 'HT-MT', 'KNT-N', 'CT', 'ThienUng', 'SVDN', 'Nhenhexky', 'Algeria']
     # Column C
     column_c = [PGDB.get_accum_plan_year(field_id=field, year=year, plan_type='KHSLCPGiaoOil') for field in fields]
     # Column D
@@ -303,7 +304,7 @@ def generate_oil_report(query_date,
                     ('Ruby', 'Pearl', 'Topaz', 'Diamond'),
                     ('STD', 'STV', 'STD-DB', 'STT', 'STN'), 
                     'CNV', 'TGT', 'CS', 'LT', 'RD-RDT',
-                    ('HST', 'HSD'), 'TLDD', 'HT-MT', 'CT', 
+                    ('HST', 'HSD'), 'TLDD', 'HT-MT', 'KNT-N', 'CT', 
                     'ThienUng', 'SV', 'Nhenhexky', 'Algeria'
                     ]
     column_e = []
@@ -461,7 +462,7 @@ def generate_oil_report_w_latest_data(query_date,
                         ('Ruby', 'Pearl', 'Topaz', 'Diamond'),
                         ('STD', 'STV', 'STD-DB', 'STT', 'STN'), 
                         'CNV', 'TGT', 'CS', 'LT', 'RD-RDT',
-                        ('HST', 'HSD'), 'TLDD', 'HT-MT', 'CT', 
+                        ('HST', 'HSD'), 'TLDD', 'HT-MT', 'KNT-N', 'CT', 
                         'ThienUng', 'SV', 'Nhenhexky', 'Algeria'
                     ]
     _latest_dates_by_field = {}
@@ -692,6 +693,7 @@ def generate_gas_report(query_date,
         'Chim Sáo+  Dừa',
         'STĐ+STV+STT+STN',
         'Cá Ngừ Vàng',
+        'Kình Ngư Trắng',
         'Lan Tây+Lan Đỏ',
         'Rồng Đôi+Rồng Đôi Tây',
         'Lô PM3-CAA ( tổng khí về bờ)',
@@ -703,8 +705,8 @@ def generate_gas_report(query_date,
         'Đại Hùng',
         'Cá Tầm',
     ]
-    KHQT_fields = ['BH', 'TGT', 'RangDong', 'CS', 'STD-STV-STT', 'CNV', 'LTLD', 'RD-RDT', 'PM3CA-46CN', 'HST-HSD', 'HT-MT', 'TB', 'ThienUng', 'SVDN', 'DH', 'CT']
-    KHCP_fields = ['BH', 'TGT', 'RDPD', 'CS-D', 'STD-STV-STT-STN', 'CNV', 'LTLD', 'RD-RDT', 'PM3CA-46CN', 'HST-HSD', 'HT-MT', 'TB', 'ThienUng', 'SVDN', 'DH', 'CT']
+    KHQT_fields = ['BH', 'TGT', 'RangDong', 'CS', 'STD-STV-STT', 'CNV', 'KNT-N', 'LTLD', 'RD-RDT', 'PM3CA-46CN', 'HST-HSD', 'HT-MT', 'TB', 'ThienUng', 'SVDN', 'DH', 'CT']
+    KHCP_fields = ['BH', 'TGT', 'RDPD', 'CS-D', 'STD-STV-STT-STN', 'CNV', 'KNT-N', 'LTLD', 'RD-RDT', 'PM3CA-46CN', 'HST-HSD', 'HT-MT', 'TB', 'ThienUng', 'SVDN', 'DH', 'CT']
 
     # Column C
     column_c = [PGDB.get_accum_plan_year(field_id=field, year=year, plan_type='KHSLCPGiaoGas') for field in KHCP_fields]
@@ -717,7 +719,7 @@ def generate_gas_report(query_date,
                     ('RangDong', 'PhuongDong'),
                     'CS',
                     ('STD', 'STV', 'STD-DB', 'STT', 'STN'), 
-                    'CNV', 'LT', 'RD-RDT', 
+                    'CNV', 'KNT-N', 'LT', 'RD-RDT', 
                     'PM3-46CN',
                     'HST-HSD', 'HT', 'ThaiBinh', 'ThienUng', 'SV', 'DH', 'CT'
                     ]
@@ -887,7 +889,7 @@ def generate_gas_report_w_latest_data(query_date,
                     ('RangDong', 'PhuongDong'),
                     'CS',
                     ('STD', 'STV', 'STD-DB', 'STT', 'STN'), 
-                    'CNV', 'LT', 'RD-RDT', 
+                    'CNV', 'KNT-N', 'LT', 'RD-RDT', 
                     'PM3-46CN',
                     'HST-HSD', 'HT', 'ThaiBinh', 'ThienUng', 'SV', 'DH', 'CT'
                     ]
