@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from .pgdb import generate_oil_report, generate_gas_report
+from .pgdb import generate_oil_report_w_latest_data, generate_gas_report_w_latest_data
 from fastapi.responses import StreamingResponse, JSONResponse
 import pandas as pd
 from io import StringIO
@@ -9,7 +9,7 @@ router = APIRouter()
 
 @router.post("/oilreport")
 def gen_df_oil_report(request: ReportRequest):
-    report_df: pd.DataFrame = generate_oil_report(
+    report_df: pd.DataFrame = generate_oil_report_w_latest_data(
         request.query_date,
         request.POSTGRES_DB,
         request.POSTGRES_USER,
@@ -21,7 +21,7 @@ def gen_df_oil_report(request: ReportRequest):
 
 @router.post("/gasreport")
 def gen_df_gas_report(request: ReportRequest):
-    report_df: pd.DataFrame = generate_gas_report(
+    report_df: pd.DataFrame = generate_gas_report_w_latest_data(
         request.query_date,
         request.POSTGRES_DB,
         request.POSTGRES_USER,

@@ -59,6 +59,62 @@ class PGOilQuery:
             )
         self.conn.commit()
 
+    def get_latest_date_by_field(self, field_id, prod_type, query_date = '2025/07/01'): #"%Y/%m/%d"
+        # Check latest date of data before the query_date, if no data, choose the closest data had data
+        query_date = datetime.strptime(query_date, "%Y/%m/%d").date()
+        found = False
+        excepted_dates = []
+        self.cur.execute("""
+                SELECT report_date
+                FROM daily_prod
+                WHERE field_id = %s AND prod_type = %s AND report_date <= %s
+                ORDER BY report_date DESC
+                LIMIT 1;
+            """, (field_id, prod_type, query_date))
+        try:
+            _last_date = self.cur.fetchone()[0]
+        except:
+            _last_date = None
+
+        while not found:
+            # Check the data by that date
+            if _last_date is not None:
+                self.cur.execute("""
+                    SELECT * FROM daily_prod
+                    WHERE field_id = %s AND report_date = %s AND prod_type = %s;
+                """, (field_id, _last_date, prod_type))
+                data = self.cur.fetchone()
+                _prod_ton = data[3] if data is not None else None
+                _prod_bbls = data[4] if data is not None else None
+                _prod_m3 = data[5] if data is not None else None
+                _prod_ft3 = data[6] if data is not None else None
+                if prod_type=='OIL_PROD' and (_prod_ton is not None and _prod_bbls is not None):
+                    found = True
+                    return _last_date#.strftime("%Y/%m/%d")
+                elif prod_type=='GAS_PROD' and (_prod_m3 is not None and _prod_ft3 is not None):
+                    found = True
+                    # Return data as string #"%Y/%m/%d"
+                    return _last_date#.strftime("%Y/%m/%d")
+                else:
+                    excepted_dates.append(_last_date)
+                    print(f"Daily data on {_last_date} is incomplete for {field_id} - {prod_type}. Trying previous date...")
+                    # Temporarily remove that date and check again
+                    self.cur.execute("""
+                        SELECT report_date
+                        FROM daily_prod
+                        WHERE field_id = %s AND prod_type = %s AND report_date <= %s
+                        AND report_date NOT IN %s
+                        ORDER BY report_date DESC
+                        LIMIT 1;
+                    """, (field_id, prod_type, query_date, tuple(excepted_dates)))
+                    try:
+                        _last_date = self.cur.fetchone()[0]
+                    except:
+                        _last_date = None
+            else:
+                print(f"No data found for {field_id} - {prod_type}.")
+                return None
+
     def get_all_table_names(self):
         self.cur.execute("""
             SELECT table_name
@@ -384,7 +440,71 @@ def generate_oil_report(query_date,
         "SL ngày (thùng)": [ '%.2f' % elem for elem in column_r ]
     }
     return pd.DataFrame(data)
+ 
+def generate_oil_report_w_latest_data(query_date, 
+                    POSTGRES_DB, 
+                    POSTGRES_USER, 
+                    POSTGRES_PASSWORD,
+                    HOST,
+                    PORT):
+    PGDB = PGOilQuery(
+        dbname=POSTGRES_DB,
+        user=POSTGRES_USER,
+        password=POSTGRES_PASSWORD,
+        host=HOST,
+        port=PORT
+    )
 
+    sub_field_ids = [('BH', 'R', 'GT', 'ThT', 'NR'), 
+                        'DM', 'DC-GPP', 'DH', 'PM3CAA', '46CN',
+                        ('RangDong', 'PhuongDong'),
+                        ('Ruby', 'Pearl', 'Topaz', 'Diamond'),
+                        ('STD', 'STV', 'STD-DB', 'STT', 'STN'), 
+                        'CNV', 'TGT', 'CS', 'LT', 'RD-RDT',
+                        ('HST', 'HSD'), 'TLDD', 'HT-MT', 'CT', 
+                        'ThienUng', 'SV', 'Nhenhexky', 'Algeria'
+                    ]
+    _latest_dates_by_field = {}
+    for sub_field_id in sub_field_ids:
+        if isinstance(sub_field_id, tuple):
+            dates = []
+            for field_id in sub_field_id:
+                _date = PGDB.get_latest_date_by_field(field_id, 'OIL_PROD', query_date)
+                dates.append(_date)
+            valid_dates = [d for d in dates if d is not None]
+            _date = max(valid_dates) if valid_dates else None
+            _latest_dates_by_field[sub_field_id] = _date
+        else:
+            _date = PGDB.get_latest_date_by_field(sub_field_id, 'OIL_PROD', query_date)
+            _latest_dates_by_field[sub_field_id] = _date
+
+    report = generate_oil_report(query_date,
+                                POSTGRES_DB, 
+                                POSTGRES_USER, 
+                                POSTGRES_PASSWORD,
+                                HOST,
+                                PORT)
+    _reformat_date = datetime.strptime(query_date, "%Y/%m/%d")
+    report['Dữ liệu cập nhật đến ngày'] = _reformat_date.strftime("%d/%m/%Y")
+    for i, (k, v) in enumerate(_latest_dates_by_field.items()):
+        if v is not None and v != datetime.strptime(query_date, "%Y/%m/%d").date():
+            _query_date = v.strftime("%Y/%m/%d")
+            print(f"Field {k} has latest data on {_query_date}, not {query_date}")
+            _new_query_report = generate_oil_report(_query_date,
+                                                    POSTGRES_DB, 
+                                                    POSTGRES_USER, 
+                                                    POSTGRES_PASSWORD,
+                                                    HOST,
+                                                    PORT)
+            _reformat_date = datetime.strptime(_query_date, "%Y/%m/%d")
+            _new_query_report['Dữ liệu cập nhật đến ngày'] = _reformat_date.strftime("%d/%m/%Y")
+            report.at[i, 'Dữ liệu cập nhật đến ngày'] = v.strftime("%d/%m/%Y")
+            report.loc[i, :] = _new_query_report.loc[i, :].values
+        else:
+            print(f"Field {k} has latest data on same date")
+    return report
+
+# ================= GAS REPORT ================================== GAS REPORT ===========================================
 class PGGasQuery:
     def __init__(self, dbname, user, password, host, port):
         self.conn = psycopg2.connect(
@@ -403,6 +523,62 @@ class PGGasQuery:
             WHERE table_schema = 'public';
         """)
         return [row[0] for row in self.cur.fetchall()]
+
+    def get_latest_date_by_field(self, field_id, prod_type='GAS_PROD', query_date = '2025/07/01'): #"%Y/%m/%d"
+        # Check latest date of data before the query_date, if no data, choose the closest data had data
+        query_date = datetime.strptime(query_date, "%Y/%m/%d").date()
+        found = False
+        excepted_dates = []
+        self.cur.execute("""
+                SELECT report_date
+                FROM daily_prod
+                WHERE field_id = %s AND prod_type = %s AND report_date <= %s
+                ORDER BY report_date DESC
+                LIMIT 1;
+            """, (field_id, prod_type, query_date))
+        try:
+            _last_date = self.cur.fetchone()[0]
+        except:
+            _last_date = None
+
+        while not found:
+            # Check the data by that date
+            if _last_date is not None:
+                self.cur.execute("""
+                    SELECT * FROM daily_prod
+                    WHERE field_id = %s AND report_date = %s AND prod_type = %s;
+                """, (field_id, _last_date, prod_type))
+                data = self.cur.fetchone()
+                _prod_ton = data[3] if data is not None else None
+                _prod_bbls = data[4] if data is not None else None
+                _prod_m3 = data[5] if data is not None else None
+                _prod_ft3 = data[6] if data is not None else None
+                if prod_type=='OIL_PROD' and (_prod_ton is not None and _prod_bbls is not None):
+                    found = True
+                    return _last_date#.strftime("%Y/%m/%d")
+                elif prod_type=='GAS_PROD' and (_prod_m3 is not None and _prod_ft3 is not None):
+                    found = True
+                    # Return data as string #"%Y/%m/%d"
+                    return _last_date#.strftime("%Y/%m/%d")
+                else:
+                    excepted_dates.append(_last_date)
+                    print(f"Daily data on {_last_date} is incomplete for {field_id} - {prod_type}. Trying previous date...")
+                    # Temporarily remove that date and check again
+                    self.cur.execute("""
+                        SELECT report_date
+                        FROM daily_prod
+                        WHERE field_id = %s AND prod_type = %s AND report_date <= %s
+                        AND report_date NOT IN %s
+                        ORDER BY report_date DESC
+                        LIMIT 1;
+                    """, (field_id, prod_type, query_date, tuple(excepted_dates)))
+                    try:
+                        _last_date = self.cur.fetchone()[0]
+                    except:
+                        _last_date = None
+            else:
+                print(f"No data found for {field_id} - {prod_type}.")
+                return None
     
     #=======GET FOR REPORTING=========
     # Column C, D
@@ -692,3 +868,65 @@ def generate_gas_report(query_date,
             "SL ngày (tr.ft3)": ["%.2f" % elem for elem in column_r]
         }
     return pd.DataFrame(data)
+
+def generate_gas_report_w_latest_data(query_date, 
+                    POSTGRES_DB, 
+                    POSTGRES_USER, 
+                    POSTGRES_PASSWORD,
+                    HOST,
+                    PORT):
+    PGDB = PGGasQuery(
+        dbname=POSTGRES_DB,
+        user=POSTGRES_USER,
+        password=POSTGRES_PASSWORD,
+        host=HOST,
+        port=PORT
+    )
+    sub_field_ids = [('BH', 'R'), 
+                    'TGT',
+                    ('RangDong', 'PhuongDong'),
+                    'CS',
+                    ('STD', 'STV', 'STD-DB', 'STT', 'STN'), 
+                    'CNV', 'LT', 'RD-RDT', 
+                    'PM3-46CN',
+                    'HST-HSD', 'HT', 'ThaiBinh', 'ThienUng', 'SV', 'DH', 'CT'
+                    ]
+    _latest_dates_by_field = {}
+    for sub_field_id in sub_field_ids:
+        if isinstance(sub_field_id, tuple):
+            dates = []
+            for field_id in sub_field_id:
+                _date = PGDB.get_latest_date_by_field(field_id, 'GAS_PROD', query_date)
+                dates.append(_date)
+            valid_dates = [d for d in dates if d is not None]
+            _date = max(valid_dates) if valid_dates else None
+            _latest_dates_by_field[sub_field_id] = _date
+        else:
+            _date = PGDB.get_latest_date_by_field(sub_field_id, 'GAS_PROD', query_date)
+            _latest_dates_by_field[sub_field_id] = _date
+
+    report = generate_gas_report(query_date,
+                                POSTGRES_DB, 
+                                POSTGRES_USER, 
+                                POSTGRES_PASSWORD,
+                                HOST,
+                                PORT)
+    _reformat_date = datetime.strptime(query_date, "%Y/%m/%d")
+    report['Dữ liệu cập nhật đến ngày'] = _reformat_date.strftime("%d/%m/%Y")
+    for i, (k, v) in enumerate(_latest_dates_by_field.items()):
+        if v is not None and v != datetime.strptime(query_date, "%Y/%m/%d").date():
+            _query_date = v.strftime("%Y/%m/%d")
+            print(f"Field {k} has latest data on {_query_date}, not {query_date}")
+            _new_query_report = generate_gas_report(_query_date,
+                                                    POSTGRES_DB, 
+                                                    POSTGRES_USER, 
+                                                    POSTGRES_PASSWORD,
+                                                    HOST,
+                                                    PORT)
+            _reformat_date = datetime.strptime(_query_date, "%Y/%m/%d")
+            _new_query_report['Dữ liệu cập nhật đến ngày'] = _reformat_date.strftime("%d/%m/%Y")
+            report.at[i, 'Dữ liệu cập nhật đến ngày'] = v.strftime("%d/%m/%Y")
+            report.loc[i, :] = _new_query_report.loc[i, :].values
+        else:
+            print(f"Field {k} has latest data on same date")
+    return report
